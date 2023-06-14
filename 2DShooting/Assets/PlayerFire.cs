@@ -41,7 +41,6 @@ public class PlayerFire : MonoBehaviour
 
             // 누르는 순간에도 발사
             MakeBullet();
-            currTime = 0;
         }
         else if (Input.GetButtonUp("Fire1"))
         {

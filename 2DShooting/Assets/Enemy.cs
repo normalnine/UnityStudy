@@ -19,11 +19,11 @@ public class Enemy : MonoBehaviour
         // 30%의 확류롤 플레이어 방향, 나머지 확률로 아래로 정하고 싶다.
         int rvalue = Random.Range(0, 10);
 
-        if(rvalue < 3)
+        if (rvalue < 3)
         {
             // 플레이어 방향
             GameObject target = GameObject.Find("Player");
-            if(target)
+            if (target)
             {
                 dir = target.transform.position - this.transform.position;
                 dir.Normalize();
@@ -37,7 +37,6 @@ public class Enemy : MonoBehaviour
         {
             dir = Vector3.down;
         }
-        
     }
 
     // Update is called once per frame
@@ -48,10 +47,38 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        // 너죽고
-        Destroy(collision.gameObject);
+        //print(collision.gameObject.name);
+        // 만약 부딪힌 상대방의 이름에 Player라는 문자열이 포함되어있다면
+        if (collision.gameObject.name.Contains("Player"))
+        {
+            // collision에게 PlayerHP컴포넌트를 가져오고 싶다.
+            // 체력을 1감소하고 싶다.
+            PlayerHP php = collision.gameObject.GetComponent<PlayerHP>();
+            php.HP--;
+
+            // 체력이 0이라면
+            if (php.HP <= 0)
+            {
+                // 너죽고
+                Destroy(collision.gameObject);
+
+                // 게임오버UI를 활성화 하고 싶다.
+                GameManager.instance.gameOverUI.SetActive(true);
+            }
+        }
+        else
+        {
+            // 나 : Enemy, 너(collision) : Bullet
+
+            // 너죽고
+            Destroy(collision.gameObject);
+
+            // 점수를 1점 증가시키고 싶다.
+            // GameObejct.Find를 이용해서 구현하세요.
+            ScoreManager.instance.SCORE++;
+
+        }
         // 나죽자
         Destroy(this.gameObject);
-        //print(collision.gameObject.name);
     }
 }
