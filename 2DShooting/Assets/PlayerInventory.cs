@@ -51,7 +51,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 playerHP.HP = playerHP.maxHP;
                 POTION--;
-            }            
+            }
         }
     }
 }
