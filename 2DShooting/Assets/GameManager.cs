@@ -39,7 +39,10 @@ public class GameManager : MonoBehaviour
     // Quit 버튼을 누르면 종료 하고 싶다.
     public void OnMyQuit()
     {
-        EditorApplication.isPlaying = false;
-        Application.Quit();
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit(); // 어플리케이션 종료
+#endif
     }
 }

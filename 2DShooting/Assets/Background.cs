@@ -16,8 +16,7 @@ public class Background : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        
+    {        
         renderer.material.mainTextureOffset += Vector2.up * speed * Time.deltaTime;    
     }
 }

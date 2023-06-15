@@ -20,7 +20,7 @@ public class PlayerHP : MonoBehaviour
         // 태어날 때 체력을 최대 체력으로 하고 싶다.
         // 그리고 화면에 포현하고 싶다.
         sliderHP.maxValue = maxHP;
-        HP = maxHP;
+        HP = 1;
     }
 
     public int HP

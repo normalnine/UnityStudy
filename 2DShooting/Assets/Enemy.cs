@@ -7,15 +7,21 @@ using Random = UnityEngine.Random;
 // 아래로 이동하고싶다.
 // 30%의 확류롤 플레이어 방향, 나머지 확률로 아래로 정하고 싶다.
 // 살아가면서 그 방향으로 이동하고 싶다.
+// 내(Enemy)가 파괴될 때 폭발공장에서 폭발을 만들어서 내 위치에 배치하고 싶다.
+// 폭발은 2초 후에 파괴되게 하고 싶다.
 
 public class Enemy : MonoBehaviour
 {
     public float speed = 5;
     Vector3 dir;
+    EnemyHP enemyHP;
+    public GameObject explosionFactory;
 
     // Start is called before the first frame update
     void Start()
     {
+        enemyHP = GetComponent<EnemyHP>();
+
         // 30%의 확류롤 플레이어 방향, 나머지 확률로 아래로 정하고 싶다.
         int rvalue = Random.Range(0, 10);
 
@@ -27,6 +33,7 @@ public class Enemy : MonoBehaviour
             {
                 dir = target.transform.position - this.transform.position;
                 dir.Normalize();
+                transform.up = -dir;
             }
             else
             {
@@ -69,16 +76,19 @@ public class Enemy : MonoBehaviour
         else
         {
             // 나 : Enemy, 너(collision) : Bullet
-
             // 너죽고
             Destroy(collision.gameObject);
-
-            // 점수를 1점 증가시키고 싶다.
-            // GameObejct.Find를 이용해서 구현하세요.
-            ScoreManager.instance.SCORE++;
-
         }
-        // 나죽자
-        Destroy(this.gameObject);
+        enemyHP.HP--;
+
+        if (enemyHP.HP <= 0)
+        {
+            // 점수를 1점 증가시키고 싶다.
+            ScoreManager.instance.SCORE++;
+            GameObject explosion = Instantiate(explosionFactory);
+            explosion.transform.position = transform.position;
+            // 나죽자
+            Destroy(this.gameObject);
+        }
     }
 }
