@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     }
 
     // Restart 버튼을 누르면 재시작 하고 싶다.
-    public void OnMyRestart()
+    public void OnMyRestart() 
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }    
