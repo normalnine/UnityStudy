@@ -77,7 +77,8 @@ public class Enemy : MonoBehaviour
         {
             // 나 : Enemy, 너(collision) : Bullet
             // 너죽고
-            Destroy(collision.gameObject);
+            // 비활성 목록에 다시 추가한다.
+            PlayerFire.deActivBulletObjectPool.Add(collision.gameObject);
         }
         enemyHP.HP--;
 

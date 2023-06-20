@@ -378,6 +378,7 @@
 "Assets/PlayerInventory.cs"
 "Assets/PlayerMove.cs"
 "Assets/ScoreManager.cs"
+"Assets/SpawnManager.cs"
 "Assets/Tail.cs"
 -langversion:9.0
 
