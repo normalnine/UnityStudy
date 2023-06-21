@@ -7,6 +7,15 @@ using UnityEngine;
 // 적 공장에서 적을 만들어서 그 위치에 배치하고 싶다.
 public class SpawnManager : MonoBehaviour
 {
+    public static SpawnManager instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    public bool isBoos = false;
+
     public Transform[] spawnList;
     float currTime = 0;
     public float makeTime = 1;
@@ -19,8 +28,26 @@ public class SpawnManager : MonoBehaviour
         enemyFactory = Resources.Load<GameObject>("Enemy");
     }
 
-    // Update is called once per frame
     void Update()
+    {
+        if(isBoos)
+        {
+            UpdateBoss();
+        }
+        else
+        {
+            UpdateNoraml();
+        }
+    }
+
+    // 화면에 강적공장에서 강적을 하나만 만들어지게 하고 싶다.
+    void UpdateBoss()
+    { 
+       
+    }
+
+    // Update is called once per frame
+    void UpdateNoraml()
     {   // 적 공장에서 적을 만들어서 그 위치에 배치하고 싶다.
 
         // 1. 시간이 흐르다가

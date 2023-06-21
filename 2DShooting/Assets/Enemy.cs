@@ -84,6 +84,9 @@ public class Enemy : MonoBehaviour
 
         if (enemyHP.HP <= 0)
         {
+            // 적을 파괴될 때 경험치를 1 획득하고 싶다. UI에 표현하고 싶다.
+            PlayerLevel.instance.EXP++;
+
             // 점수를 1점 증가시키고 싶다.
             ScoreManager.instance.SCORE++;
             GameObject explosion = Instantiate(explosionFactory);
