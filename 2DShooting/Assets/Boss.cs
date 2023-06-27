@@ -13,11 +13,6 @@ public class Boss : MonoBehaviour
     const int ATTACK = 1;
     const int WAIT = 2;
 
-    enum State
-    {
-       
-    }
-
     int state;
     public float speed = 10;
 
@@ -28,6 +23,7 @@ public class Boss : MonoBehaviour
     {
         // 명시적
         state = MOVE;
+        moveTarget = GameObject.Find("BossTarget").transform;
     }
 
     // Update is called once per frame
@@ -74,6 +70,8 @@ public class Boss : MonoBehaviour
         {
             currTime = 0;
             GameObject bullet = Instantiate(bossBulletFactory);
+            
+            bullet.layer = LayerMask.NameToLayer("EnemyBullet");
             bullet.transform.position = transform.position;
             bullet.transform.eulerAngles = new Vector3(0, 0, angleZ);
             angleZ += oneStepAngle;
@@ -103,5 +101,17 @@ public class Boss : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        
+    }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("Bullet"))
+        {
+            PlayerFire.deActivBulletObjectPool.Add(other.gameObject);           
+        }      
+        Destroy(this.gameObject);
+    }
 }

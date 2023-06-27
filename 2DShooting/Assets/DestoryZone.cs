@@ -7,7 +7,7 @@ public class DestoryZone : MonoBehaviour
 { 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.name.Contains("Bullet"))
+        if(other.gameObject.CompareTag("Bullet"))
         {
             // 총알은 ObjectPool로 되어있으니 파괴하지 않고 비활성화한다.
             other.gameObject.SetActive(false);

@@ -72,6 +72,8 @@ public class Enemy : MonoBehaviour
                 // 게임오버UI를 활성화 하고 싶다.
                 GameManager.instance.gameOverUI.SetActive(true);
             }
+            Destroy(this.gameObject);
+
         }
         else
         {

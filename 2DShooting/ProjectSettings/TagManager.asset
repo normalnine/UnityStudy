@@ -6,6 +6,8 @@ TagManager:
   tags:
   - FxTemporaire
   - Item
+  - Bullet
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX
@@ -20,7 +22,7 @@ TagManager:
   - Bullet
   - DestroyZone
   - Item
-  - 
+  - EnemyBullet
   - 
   - 
   - 
