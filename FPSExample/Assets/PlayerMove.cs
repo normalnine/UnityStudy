@@ -1,15 +1,18 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// »ç¿ëÀÚÀÇ ÀÔ·Â¿¡ µû¶ó¼­ ¾ÕµÚÁÂ¿ì·Î ÀÌµ¿ÇÏ°í ½Í´Ù.
-// »ç¿ëÀÚ°¡ Á¡ÇÁ¹öÆ°À» ´©¸£¸é Á¡ÇÁ¸¦ ¶Ù°í ½Í´Ù.
+// ì‚¬ìš©ìì˜ ì…ë ¥ì— ë”°ë¼ì„œ ì•ë’¤ì¢Œìš°ë¡œ ì´ë™í•˜ê³  ì‹¶ë‹¤.
+// ì‚¬ìš©ìê°€ ì í”„ë²„íŠ¼ì„ ëˆ„ë¥´ë©´ ì í”„ë¥¼ ë›°ê³  ì‹¶ë‹¤.
 public class PlayerMove : MonoBehaviour
 {
     public float jumpPower = 2;
     public float gravity = -9.81f;
     float yVelocity;
     public float speed = 5;
+
+    int jumpCount = 0;
+    public int maxJumpCount = 2;
 
     CharacterController cc;
 
@@ -25,36 +28,46 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Áß·ÂÀÇ ÈûÀÌ ÀÛ¿ëÇØ¾ßÇÑ´Ù.
+        // ì¤‘ë ¥ì˜ í˜ì´ ì‘ìš©í•´ì•¼í•œë‹¤.
         yVelocity += gravity * Time.deltaTime;
 
-        // ¸¸¾à ¶¥¿¡ ¼­ÀÖ´Ù ±×¸®°í »ç¿ëÀÚ°¡ Á¡ÇÁ¹öÆ°À» ´©¸£¸é
-        if (cc.isGrounded&&Input.GetButtonDown("Jump"))
+        // ë•…ì— ë‹¿ì•˜ë‹¤ë©´ ì í”„ì¹´ìš´íŠ¸ë¥¼ ì´ˆê¸°í™”í•˜ê³  ì‹¶ë‹¤.
+        if (cc.isGrounded)
         {
-            // JumpPower°¡ ÀÛ¿ëÇØ¾ßÇÑ´Ù.
-            yVelocity = jumpPower;
+            jumpCount = 0;
+            // ë•…ì— ì„œìˆì„ ë•ŒëŠ” yì†ë„ê°€ ë³€í™”í•˜ì§€ ì•Šê²Œ í•˜ê³  ì‹¶ë‹¤.
+            yVelocity = 0;
         }
 
-        // 1. »ç¿ëÀÚÀÇ ÀÔ·Â¿¡ µû¶ó
+        // ë§Œì•½ ì í”„ì¹´ìš´íŠ¸ê°€ ìµœëŒ€ ë³´ë‹¤ ì‘ë‹¤ ê·¸ë¦¬ê³  ê·¸ë¦¬ê³  ì‚¬ìš©ìê°€ ì í”„ë²„íŠ¼ì„ ëˆ„ë¥´ë©´
+        if (jumpCount < maxJumpCount && Input.GetButtonDown("Jump"))
+        {
+            // JumpPowerê°€ ì‘ìš©í•´ì•¼í•œë‹¤.
+            yVelocity = jumpPower;
+            jumpCount++;
+        }
+        
+
+        // 1. ì‚¬ìš©ìì˜ ì…ë ¥ì— ë”°ë¼
         float v = Input.GetAxis("Vertical");
         float h = Input.GetAxis("Horizontal");
-        // 2. ¹æÇâÀ» ¸¸µé°í
+        // 2. ë°©í–¥ì„ ë§Œë“¤ê³ 
         Vector3 dir = new Vector3(h, 0, v);
         
-        // 3. ÇöÀç ¹æÇâÀ» Ä«¸Ş¶óÀÇ ¾Õ¹æÇâÀ» ±âÁØÀ¸·Î º¯È¯ÇÏ°í ½Í´Ù.
+        // 3. í˜„ì¬ ë°©í–¥ì„ ì¹´ë©”ë¼ì˜ ì•ë°©í–¥ì„ ê¸°ì¤€ìœ¼ë¡œ ë³€í™˜í•˜ê³  ì‹¶ë‹¤.
         dir = cam.transform.TransformDirection(dir);
         dir.y = 0;
         dir.Normalize();
-        // °áÁ¤µÈ y¼Óµµ¸¦ dirÀÇ yÇ×¸ñ¿¡ ¹İ¿µµÇ¾î¾ßÇÑ´Ù.
+        // ê²°ì •ëœ yì†ë„ë¥¼ dirì˜ yí•­ëª©ì— ë°˜ì˜ë˜ì–´ì•¼í•œë‹¤.
         Vector3 velocity = dir * speed;
         velocity.y = yVelocity;
-        // 4. ±× ¹æÇâÀ¸·Î ÀÌµ¿ÇÏ°í ½Í´Ù.
+        // 4. ê·¸ ë°©í–¥ìœ¼ë¡œ ì´ë™í•˜ê³  ì‹¶ë‹¤.
         //transform.position += velocity * Time.deltaTime;
-        cc.Move(velocity * Time.deltaTime);        
+        cc.Move(velocity * Time.deltaTime);
     }
 
     private void OnDrawGizmos()
-    {
+    {    
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, transform.position+Vector3.up*yVelocity);
     }
