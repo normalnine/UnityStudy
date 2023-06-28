@@ -19,4 +19,18 @@ public class Bullet : MonoBehaviour
     {
         transform.forward = rb.velocity.normalized;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        // 만약 부딪힌물체에 Rigidbody가 있다면
+        var otherRB = collision.gameObject.GetComponent<Rigidbody>();
+
+        // 내 앞방향으로 힘을 10 가하고 싶다.
+        if(otherRB != null)
+        {
+            otherRB.AddForce(transform.forward * 2000, ForceMode.Impulse);
+        }
+        Destroy(gameObject);
+
+    }
 }
