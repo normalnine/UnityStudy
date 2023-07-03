@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
     }
 
     public State state;
+    public Animator anim;
    
 
     public float speed = 5;
@@ -26,7 +27,7 @@ public class Enemy : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {        
+    {
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -58,6 +59,7 @@ public class Enemy : MonoBehaviour
         {
             // 이동상태로 전이하고 싶다.
             state = State.Move;
+            anim.SetTrigger("Move");
         }        
     }
 
