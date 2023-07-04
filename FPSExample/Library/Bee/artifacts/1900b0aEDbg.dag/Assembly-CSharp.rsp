@@ -348,9 +348,6 @@
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/Unity.VSCode.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/UnityEngine.UI.ref.dll"
-"Assets/Bullet.cs"
-"Assets/CameraRotate.cs"
-"Assets/Enemy.cs"
 "Assets/JMO Assets/WarFX/Demo/Assets/CFX_AutoStopLoopedEffect.cs"
 "Assets/JMO Assets/WarFX/Demo/Assets/CFX_Demo_RandomDir.cs"
 "Assets/JMO Assets/WarFX/Demo/Assets/CFX_Demo_RotateCamera.cs"
@@ -365,8 +362,13 @@
 "Assets/JMO Assets/WarFX/Scripts/WFX_BulletHoleDecal.cs"
 "Assets/JMO Assets/WarFX/Scripts/WFX_LightFlicker.cs"
 "Assets/JMO Assets/WarFX/Spawn System/CFX_SpawnSystem.cs"
-"Assets/PlayerFire.cs"
-"Assets/PlayerMove.cs"
+"Assets/Scripts/Bullet.cs"
+"Assets/Scripts/CameraRotate.cs"
+"Assets/Scripts/Enemy.cs"
+"Assets/Scripts/Enemy2.cs"
+"Assets/Scripts/Enemy2AnimEvent.cs"
+"Assets/Scripts/PlayerFire.cs"
+"Assets/Scripts/PlayerMove.cs"
 -langversion:9.0
 
 /deterministic
