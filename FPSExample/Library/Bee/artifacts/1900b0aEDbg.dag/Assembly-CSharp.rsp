@@ -370,6 +370,7 @@
 "Assets/Scripts/Enemy2.cs"
 "Assets/Scripts/Enemy2AnimEvent.cs"
 "Assets/Scripts/EnemyHP.cs"
+"Assets/Scripts/Grenade.cs"
 "Assets/Scripts/HitManager.cs"
 "Assets/Scripts/PlayerFire.cs"
 "Assets/Scripts/PlayerMove.cs"
