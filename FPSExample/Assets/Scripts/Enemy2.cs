@@ -8,6 +8,8 @@ using UnityEngine.AI;
 // Agent를 이용해서 이동하고 싶다.
 public class Enemy2 : MonoBehaviour
 {
+    EnemyHP enemyHP;
+
     NavMeshAgent agent;
     Animator anim;
     GameObject target;
@@ -17,7 +19,9 @@ public class Enemy2 : MonoBehaviour
     {
         Idle,
         Move,
-        Attack
+        Attack,
+        React,  // 데미지
+        Die,    // 죽음
     }
 
     public State state;
@@ -27,6 +31,7 @@ public class Enemy2 : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
+        enemyHP = GetComponent<EnemyHP>();
     }
 
     // Update is called once per frame
@@ -47,7 +52,6 @@ public class Enemy2 : MonoBehaviour
             default:
                 break;
         }
-
     }
 
     private void UpdateIdle()
@@ -60,7 +64,6 @@ public class Enemy2 : MonoBehaviour
             agent.isStopped = false;
         }
     }
-
 
     private void UpdateMove()
     {
@@ -92,9 +95,9 @@ public class Enemy2 : MonoBehaviour
         if(distance <= attackRange)
         {
             print("Enemy -> Player Hit!!!");
+            HitManager.instance.DoHit();
         }
     }
-
     public void OnAttack_Finished()
     {
         // 대기 상태로 가야하는 가?
@@ -128,4 +131,24 @@ public class Enemy2 : MonoBehaviour
             anim.SetBool("isAttack", true);
         }
     }
+
+    internal void DamageProcess()
+    {
+        // 적 체력을 1 감소하고 싶다.
+        enemyHP.HP--;
+        // 만약 적 체력이 0이하라면
+        if(enemyHP.HP <= 0)
+        {
+            state = State.Die;
+            agent.isStopped = true;
+            // 파괴하고 싶다.
+            Destroy(this.gameObject, 5);
+            anim.SetTrigger("Die");            
+        }
+        else
+        {
+
+        }
+    }
+
 }

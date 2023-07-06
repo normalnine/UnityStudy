@@ -1,0 +1,41 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+
+// 태어날 때 체력이 최대 체력이 되게 하고 싶다.
+// 총에 맞으면 체력을 1 감소하고 싶다.
+public class EnemyHP : MonoBehaviour
+{
+    int hp;
+    public int maxHP = 2;
+    public Slider sliderHP;
+
+    public int HP
+    {
+        get 
+        {
+            return hp;
+        }
+        set
+        {
+            hp = value;
+            // 체력이 변경된다면 UI로 표현하고 싶다.
+            sliderHP.value = hp;
+        }
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        sliderHP.maxValue = maxHP;
+        HP = maxHP;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
