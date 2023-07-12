@@ -1,19 +1,33 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
 // 상태머신으로 제어하고 싶다.
 // Agent를 이용해서 이동하고 싶다.
+// 나를 생성한 SpawnManager 기억하고, 내가 죽을 때 걔한테 알려주고 싶다.
 public class Enemy2 : MonoBehaviour
 {
+    SpawnManager myspawnManager;
+    public void Init(SpawnManager spawnMgr)
+    {
+        myspawnManager = spawnMgr;
+    }
+
+    private void OnDestroy()
+    {
+        myspawnManager.ImDie(this);
+    }
+
     EnemyHP enemyHP;
 
     NavMeshAgent agent;
     Animator anim;
     GameObject target;
     public float attackRange = 3;
+    public GameObject damageUIFactory;
 
     public enum State
     {
@@ -29,6 +43,7 @@ public class Enemy2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
         enemyHP = GetComponent<EnemyHP>();
@@ -143,6 +158,7 @@ public class Enemy2 : MonoBehaviour
     }
     #endregion
 
+    // 데미지를 입으면 데미지 UI를 내위치 위쪽으로 1M 위로
     internal void DamageProcess(int damage = 1)
     {
         // 만약 내상태가 죽음상태라면
@@ -150,6 +166,10 @@ public class Enemy2 : MonoBehaviour
         {
             return;
         }
+
+        GameObject ui = Instantiate(damageUIFactory);
+        ui.transform.position = transform.position + Vector3.up * 1.1f;
+        
 
         // 적 체력을 damage 만큼 감소하고 싶다.
         enemyHP.HP-=damage;

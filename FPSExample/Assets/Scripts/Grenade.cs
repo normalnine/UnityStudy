@@ -18,6 +18,7 @@ public class Grenade : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * speed, ForceMode.Impulse);
+        rb.AddTorque(Vector3.right * 10, ForceMode.Impulse);
     }
 
     // Update is called once per frame
