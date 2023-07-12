@@ -373,6 +373,8 @@
 "Assets/Scripts/EnemyHP.cs"
 "Assets/Scripts/Grenade.cs"
 "Assets/Scripts/HitManager.cs"
+"Assets/Scripts/PatrolNChase/Enemy.cs"
+"Assets/Scripts/PatrolNChase/PathManager.cs"
 "Assets/Scripts/PlayerFire.cs"
 "Assets/Scripts/PlayerMove.cs"
 "Assets/Scripts/SpawnManager.cs"
