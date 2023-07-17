@@ -18,7 +18,7 @@ public class Enemy2 : MonoBehaviour
 
     private void OnDestroy()
     {
-        myspawnManager.ImDie(this);
+        myspawnManager.ImDie(gameObject);
     }
 
     EnemyHP enemyHP;

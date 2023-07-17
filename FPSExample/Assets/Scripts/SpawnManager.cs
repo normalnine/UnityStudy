@@ -15,9 +15,12 @@ public class SpawnManager : MonoBehaviour
     // 생성 최대 갯수를 제한하고 싶다.
     // 만약 생성된 녀석이 파괴되면 생성 수를 1 감소하고 싶다.
     public int makeCount = 0;
+
+
+
     public int maxMakeCount = 5;
 
-    internal void ImDie(Enemy2 enemy2)
+    internal void ImDie(GameObject gameObject)
     {
         makeCount--;
     }

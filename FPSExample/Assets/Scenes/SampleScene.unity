@@ -1465,7 +1465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   makeTime: 2
-  enemyFactory: {fileID: 3232957211638671189, guid: 2617876ad8835ac4091f18cd2d6639da, type: 3}
+  enemyFactory: {fileID: 3232957211638671189, guid: 696592852531de64f88b2d11c278e749, type: 3}
   spawnList:
   - {fileID: 979672780}
   - {fileID: 968396931}
