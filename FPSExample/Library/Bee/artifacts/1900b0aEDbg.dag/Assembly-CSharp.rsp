@@ -374,6 +374,7 @@
 "Assets/Scripts/EnemyHP.cs"
 "Assets/Scripts/Grenade.cs"
 "Assets/Scripts/HitManager.cs"
+"Assets/Scripts/LerpExample/BesierCurveTest.cs"
 "Assets/Scripts/LerpExample/LerpTest.cs"
 "Assets/Scripts/LerpExample/RotateLerpTest.cs"
 "Assets/Scripts/PatrolNChase/Enemy.cs"
