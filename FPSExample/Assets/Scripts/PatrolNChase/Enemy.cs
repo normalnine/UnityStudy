@@ -101,7 +101,7 @@ namespace PatrolNChase
                 Vector3 forwardVector = transform.forward;
 
                 float dot = Vector3.Dot(targetVector, forwardVector);
-                if (dot >= Math.Cos(20))
+                if (dot >= Math.Cos(20 * Mathf.Deg2Rad))
                 {
                     // 5. 검출된 녀석을 추적대상으로 하고싶다.
                     chaseTarget = cols[0].gameObject;
